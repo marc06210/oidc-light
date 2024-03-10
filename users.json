@@ -1,0 +1,33 @@
+[
+  {
+    "userId": "admin",
+    "password": "admin-password",
+    "firstName": "admin-firstName",
+    "lastName": "admin-lastName",
+    "email": "admin-email",
+    "profiles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "userId": "user",
+    "password": "user-password",
+    "firstName": "user-firstName",
+    "lastName": "user-lastName",
+    "email": "user-email",
+    "profiles": [
+      "USER",
+      "OTHER"
+    ]
+  },
+  {
+    "userId": "guest",
+    "password": "guest-password",
+    "firstName": "guest-firstName",
+    "lastName": "guest-lastName",
+    "email": "guest-email",
+    "profiles": [
+      "GUEST"
+    ]
+  }
+]

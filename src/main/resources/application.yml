@@ -1,0 +1,9 @@
+server:
+  port: 8001
+logging:
+  level:
+    org.springframework.web: TRACE
+
+mgu:
+  ttl:
+    60
