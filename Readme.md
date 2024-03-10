@@ -23,11 +23,11 @@ And to run the app **java -jar build/libs/oidc-light-0.0.1-SNAPSHOT.jar**
 
 Below are the properties (**application.yaml** file) you can use to customize the application.
 
-|Name of property| Purpose                 |Type| Default value         |
-|----------------|-------------------------|----|-----------------------|
-|server.port| Port of the oidc server |int| 8001                  |
-|mgu.issuer|Issuer @ that emitted the JWT|string| http://localhost:8001 |
-|mgu.ttl|Validity duration of the JWT in seconds|int| 3600<br/> (1h)        |
+|Name of property| Purpose                                 |Type| Default value         |
+|----------------|-----------------------------------------|----|-----------------------|
+|server.port| Port of the oidc server                 |int| 8001                  |
+|mgu.issuer| @ of the issuer that emitted the JWT  |string| http://localhost:8001 |
+|mgu.ttl| Validity duration of the JWT in seconds |int| 3600<br/> (1h)        |
 
 
 ## Users definition
