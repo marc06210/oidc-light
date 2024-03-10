@@ -29,6 +29,33 @@ Below are the properties (**application.yaml** file) you can use to customize th
 |mgu.issuer|Issuer @ that emitted the JWT|string|http://localhost:8001|
 |mgu.ttl|Validity duration of the JWT in seconds|int|3600s (1h)|
 
+
+## Users definition
+
+All users and their information are defined in the **users.json** file.
+This file is not packaged at build time and must be present in the directory where the application is launched.
+
+You can define custom profiles assigned to each user with the **profile** attribute.
+
+Below is an example of the result to a invocation to the **idp/userinfo.endpoint**.
+
+```json
+{
+  "email": "user-email",
+  "family_name": "user-lastName",
+  "given_name": "user-firstName",
+  "logoutUrl": "TODO",
+  "name": "user-lastName user-firstName",
+  "profile": [
+    "USER",
+    "OTHER"
+  ],
+  "sub": "user"
+}
+
+```
+
+
 ## Exposed endpoints
 
  - GET **/.well-known/openid-configuration**
