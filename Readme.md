@@ -28,6 +28,7 @@ Below are the properties (**application.yaml** file) you can use to customize th
 |server.port| Port of the oidc server                 |int| 8001                  |
 |mgu.issuer| @ of the issuer that emitted the JWT  |string| http://localhost:8001 |
 |mgu.ttl| Validity duration of the JWT in seconds |int| 3600<br/> (1h)        |
+|mgu.claim-roles| If this variable is present, then the profiles of the user will be injected in the JWT|string|null|
 
 
 ## Users definition

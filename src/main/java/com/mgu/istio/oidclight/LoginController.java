@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     private final UserConfigurationService usersConfiguration;
     private final SignatureConfiguration signatureConfiguration;
+    private final JwtBuilder jwtBuilder;
 
     @Value("${mgu.issuer:http://localhost:8001}")
     private String issuer;
@@ -21,9 +22,11 @@ public class LoginController {
     @Value("${mgu.ttl:3600}")
     private int ttl;
 
-    public LoginController(UserConfigurationService usersConfiguration, SignatureConfiguration signatureConfiguration) {
+
+    public LoginController(UserConfigurationService usersConfiguration, SignatureConfiguration signatureConfiguration, JwtBuilder jwtBuilder) {
         this.usersConfiguration = usersConfiguration;
         this.signatureConfiguration = signatureConfiguration;
+        this.jwtBuilder = jwtBuilder;
     }
 
     @PostMapping(path="/login", consumes={MediaType.APPLICATION_FORM_URLENCODED_VALUE})
@@ -32,10 +35,11 @@ public class LoginController {
         if (o instanceof String username) {
             UserInformation userConfiguration = usersConfiguration.getUserInformation(username);
             if (userConfiguration!=null && userConfiguration.getPassword().equals(request.getFirst("password"))) {
-                String jwt = JwtBuilder.createIdToken(username,
+                String jwt = jwtBuilder.createIdToken(username,
                         issuer,
                         ttl,
-                        signatureConfiguration.getPrivateKey());
+                        signatureConfiguration.getPrivateKey(),
+                        userConfiguration.getProfiles());
                 return new ResponseEntity<>(jwt, HttpStatus.OK);
             }
         }

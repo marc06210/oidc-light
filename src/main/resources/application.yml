@@ -3,3 +3,6 @@ server:
 logging:
   level:
     root: INFO
+
+mgu:
+  issuer: http://host.docker.internal:8001

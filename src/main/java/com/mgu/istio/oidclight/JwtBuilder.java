@@ -1,6 +1,8 @@
 package com.mgu.istio.oidclight;
 
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.*;
@@ -8,10 +10,14 @@ import java.util.*;
 /**
  * Convenient class to hold static methods dealing with a JWT.
  *
- * @author m408461
+ * @author Marc Guerrini
  *
  */
+@Component
 public class JwtBuilder {
+
+    @Value("${mgu.claim-roles:#{null}}")
+    private String roleClaim;
 
     public static final String JWT_ID = "mgu-oidc-light";
     public static final String SCOPE_KEY = "scope";
@@ -26,11 +32,18 @@ public class JwtBuilder {
      * @param signingKey - the private key used to sign the JWT
      * @return
      */
-    public static String createIdToken(String subject, String issuer, int jwtTtl, Key signingKey) {
+    public String createIdToken(String subject, String issuer, int jwtTtl, Key signingKey, List<String> roles) {
         Calendar c = Calendar.getInstance();
         // Let's set the JWT Claims
         Map<String, Object> claims = new HashMap<>();
         claims.put(SCOPE_KEY, PING_JWT_SCOPES);
+        Optional.ofNullable(roleClaim)
+                .ifPresent(claim -> {
+                    if (roles != null && !roles.isEmpty()) {
+                        claims.put(roleClaim, roles);
+                    }
+                });
+
         io.jsonwebtoken.JwtBuilder builder = Jwts.builder()
                 .claims(claims)
                 .id(JWT_ID)
